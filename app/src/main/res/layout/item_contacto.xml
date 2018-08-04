@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:gravity="center_vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- IMAGEN DE PERFIL -->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/item_img"
+        app:civ_circle_background_color="@color/colorAccent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_width="45dp"
+        android:src="@drawable/imagen_prueba"
+        android:layout_height="45dp" />
+
+    <!-- CONTENEDOR INFO -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- CONTENEDOR NOMBRE DEL CONTACTO Y EL ULTIMO MENSAJE -->
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <!-- Nombre del contacto -->
+            <TextView
+                android:id="@+id/item_nombre_contacto"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/negro"
+                android:text="Nombre del contacto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="2dp" />
+
+            <!-- Ultimo mensaje -->
+            <TextView
+                android:id="@+id/item_ultimo_mensaje"
+                android:text="Ultimo mensaje"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- CONTENEDOR HORA Y MENSAJE NO LEIDOS -->
+        <LinearLayout
+            android:paddingRight="15dp"
+            android:paddingLeft="10dp"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/item_hora_ultimo_mensaje"
+                android:text="12:45 PM"
+                android:textSize="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/item_cant_msj_no_leidos"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:text="5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginRight="10dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gris_claro"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
