@@ -6,4 +6,5 @@
 
     <color name="negro">#000000</color>
     <color name="gris_claro">#9fb3b3b3</color>
+    <color name="blanco">#fff</color>
 </resources>
