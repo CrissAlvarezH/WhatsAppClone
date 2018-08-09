@@ -78,4 +78,8 @@ public class ContactosAdapter extends RecyclerView.Adapter<ContactosAdapter.Cont
         return contactos.size();
     }
 
+    public void setContactos(ArrayList<Contacto> contactos){
+        this.contactos = contactos;
+        notifyDataSetChanged();
+    }
 }
