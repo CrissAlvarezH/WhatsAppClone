@@ -1,10 +1,12 @@
 package clones.cristian.com.whatsappclon;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 import clones.cristian.com.whatsappclon.adaptadores.ChatAdapter;
 import clones.cristian.com.whatsappclon.modelos.Chat;
 
-public class MainActivity extends AppCompatActivity implements ChatAdapter.ChatListener{
+public class ChatActivity extends AppCompatActivity implements ChatAdapter.ChatListener{
 
     private RecyclerView recyclerChats;
     private ChatAdapter chatAdapter;
@@ -20,10 +22,10 @@ public class MainActivity extends AppCompatActivity implements ChatAdapter.ChatL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_chat);
         setToobar();
 
-        recyclerChats = findViewById(R.id.recycler_contactos_chat);
+        recyclerChats = findViewById(R.id.recycler_chats);
 
         RecyclerView.LayoutManager lmContactosChat = new LinearLayoutManager(this);
         recyclerChats.setLayoutManager(lmContactosChat);
@@ -37,13 +39,18 @@ public class MainActivity extends AppCompatActivity implements ChatAdapter.ChatL
         chats.add( new Chat(0, "nombreContacto 4", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnuj-RSh6Sqf_J5BKjXAaMjoC9zeeImmxncIg2QQIHmfMadNW5", "ultimoMensaje", "2:30 PM", 2) );
         chats.add( new Chat(0, "nombreContacto 5", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiwf-Ig8De4vyIVgCIvFdLWRF8dnTSMe6ihG1iZchNcX7AVKuO", "ultimoMensaje", "4:27 AM", 0) );
         chats.add( new Chat(0, "nombreContacto 6", "https://i.pinimg.com/originals/83/1f/7e/831f7ebda69e66fc88dd07aa013923ea.jpg", "ultimoMensaje", "12:10 PM", 1) );
+        chats.add( new Chat(0, "nombreContacto 6", "https://i.pinimg.com/originals/83/1f/7e/831f7ebda69e66fc88dd07aa013923ea.jpg", "ultimoMensaje", "12:10 PM", 1) );
+        chats.add( new Chat(0, "nombreContacto 6", "https://i.pinimg.com/originals/83/1f/7e/831f7ebda69e66fc88dd07aa013923ea.jpg", "ultimoMensaje", "12:10 PM", 1) );
+        chats.add( new Chat(0, "nombreContacto 6", "https://i.pinimg.com/originals/83/1f/7e/831f7ebda69e66fc88dd07aa013923ea.jpg", "ultimoMensaje", "12:10 PM", 1) );
+        chats.add( new Chat(0, "nombreContacto 6", "https://i.pinimg.com/originals/83/1f/7e/831f7ebda69e66fc88dd07aa013923ea.jpg", "ultimoMensaje", "12:10 PM", 1) );
+        chats.add( new Chat(0, "nombreContacto 6", "https://i.pinimg.com/originals/83/1f/7e/831f7ebda69e66fc88dd07aa013923ea.jpg", "ultimoMensaje", "12:10 PM", 1) );
 
         chatAdapter = new ChatAdapter(this, chats, this);
         recyclerChats.setAdapter(chatAdapter);
     }
 
     private void setToobar(){
-        Toolbar toolbar = findViewById(R.id.toolbar_contactos);
+        Toolbar toolbar = findViewById(R.id.toolbar_chats);
 
         if(toolbar != null){
             setSupportActionBar(toolbar);
@@ -58,5 +65,10 @@ public class MainActivity extends AppCompatActivity implements ChatAdapter.ChatL
     @Override
     public void onChatLongClick(Chat chat, int posicion) {
         Toast.makeText(this, "Long click a "+chat.getNombreContacto(), Toast.LENGTH_SHORT).show();
+    }
+
+    public void clickAddChat(View btn){
+        Intent intent = new Intent(this, ContactosActivity.class);
+        startActivity(intent);
     }
 }

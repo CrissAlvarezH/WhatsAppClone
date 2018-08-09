@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import clones.cristian.com.whatsappclon.R;
 import clones.cristian.com.whatsappclon.modelos.Chat;
 
-public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ContactosViewHolder> {
+public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder> {
 
     public interface ChatListener {
         void onChatClick(Chat chat, int posicion);
@@ -33,13 +33,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ContactosViewH
         this.chatListener = chatListener;
     }
 
-    public class ContactosViewHolder extends RecyclerView.ViewHolder
+    public class ChatViewHolder extends RecyclerView.ViewHolder
                                     implements View.OnClickListener, View.OnLongClickListener{
 
         private ImageView img;
         private TextView txtNombreContacto, txtUltimoMensaje, txtHora, txtCantidadMsj;
 
-        public ContactosViewHolder(View itemView) {
+        public ChatViewHolder(View itemView) {
             super(itemView);
 
             img = itemView.findViewById(R.id.item_img);
@@ -73,15 +73,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ContactosViewH
 
     @NonNull
     @Override
-    public ContactosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View item = LayoutInflater.from( parent.getContext() ).inflate(R.layout.item_chat, parent, false);
 
-        return new ContactosViewHolder( item );
+        return new ChatViewHolder( item );
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ContactosViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
         Chat contacto = chats.get( position );
 
         holder.txtNombreContacto.setText( contacto.getNombreContacto() );
