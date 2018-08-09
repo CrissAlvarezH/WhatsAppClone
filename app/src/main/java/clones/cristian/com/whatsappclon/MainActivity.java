@@ -5,13 +5,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import clones.cristian.com.whatsappclon.adaptadores.ChatAdapter;
 import clones.cristian.com.whatsappclon.modelos.Chat;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ChatAdapter.ChatListener{
 
     private RecyclerView recyclerChats;
     private ChatAdapter chatAdapter;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         chats.add( new Chat(0, "nombreContacto 5", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiwf-Ig8De4vyIVgCIvFdLWRF8dnTSMe6ihG1iZchNcX7AVKuO", "ultimoMensaje", "4:27 AM", 0) );
         chats.add( new Chat(0, "nombreContacto 6", "https://i.pinimg.com/originals/83/1f/7e/831f7ebda69e66fc88dd07aa013923ea.jpg", "ultimoMensaje", "12:10 PM", 1) );
 
-        chatAdapter = new ChatAdapter(this, chats);
+        chatAdapter = new ChatAdapter(this, chats, this);
         recyclerChats.setAdapter(chatAdapter);
     }
 
@@ -47,5 +48,15 @@ public class MainActivity extends AppCompatActivity {
         if(toolbar != null){
             setSupportActionBar(toolbar);
         }
+    }
+
+    @Override
+    public void onChatClick(Chat chat, int posicion) {
+        Toast.makeText(this, "Click a "+chat.getNombreContacto(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onChatLongClick(Chat chat, int posicion) {
+        Toast.makeText(this, "Long click a "+chat.getNombreContacto(), Toast.LENGTH_SHORT).show();
     }
 }

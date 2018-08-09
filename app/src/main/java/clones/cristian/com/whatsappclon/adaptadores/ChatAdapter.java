@@ -18,15 +18,23 @@ import clones.cristian.com.whatsappclon.modelos.Chat;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ContactosViewHolder> {
 
-    private Context contexto;
-    private ArrayList<Chat> contactos;
-
-    public ChatAdapter(Context context, ArrayList<Chat> contactos) {
-        this.contactos = contactos;
-        this.contexto = context;
+    public interface ChatListener {
+        void onChatClick(Chat chat, int posicion);
+        void onChatLongClick(Chat chat, int posicion);
     }
 
-    public class ContactosViewHolder extends RecyclerView.ViewHolder {
+    private Context contexto;
+    private ArrayList<Chat> chats;
+    private ChatListener chatListener;
+
+    public ChatAdapter(Context context, ArrayList<Chat> chats, ChatListener chatListener) {
+        this.chats = chats;
+        this.contexto = context;
+        this.chatListener = chatListener;
+    }
+
+    public class ContactosViewHolder extends RecyclerView.ViewHolder
+                                    implements View.OnClickListener, View.OnLongClickListener{
 
         private ImageView img;
         private TextView txtNombreContacto, txtUltimoMensaje, txtHora, txtCantidadMsj;
@@ -39,6 +47,27 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ContactosViewH
             txtUltimoMensaje = itemView.findViewById(R.id.item_ultimo_mensaje);
             txtHora = itemView.findViewById(R.id.item_hora_ultimo_mensaje);
             txtCantidadMsj = itemView.findViewById(R.id.item_cant_msj_no_leidos);
+
+            itemView.setOnLongClickListener(this);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if( chatListener != null ){
+                chatListener.onChatClick( chats.get(getAdapterPosition()), getAdapterPosition() );
+            }
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+
+            if( chatListener != null ){
+                chatListener.onChatLongClick( chats.get(getAdapterPosition()), getAdapterPosition() );
+                return true;
+            }
+
+            return false;
         }
     }
 
@@ -53,7 +82,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ContactosViewH
 
     @Override
     public void onBindViewHolder(@NonNull ContactosViewHolder holder, int position) {
-        Chat contacto = contactos.get( position );
+        Chat contacto = chats.get( position );
 
         holder.txtNombreContacto.setText( contacto.getNombreContacto() );
         holder.txtUltimoMensaje.setText( contacto.getUltimoMensaje() );
@@ -74,7 +103,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ContactosViewH
 
     @Override
     public int getItemCount() {
-        return contactos.size();
+        return chats.size();
     }
 
 }
