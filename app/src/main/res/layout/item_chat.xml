@@ -13,9 +13,9 @@
         app:civ_circle_background_color="@color/colorAccent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_width="45dp"
+        android:layout_width="48dp"
         android:src="@drawable/imagen_prueba"
-        android:layout_height="45dp" />
+        android:layout_height="48dp" />
 
     <!-- CONTENEDOR INFO -->
     <RelativeLayout
@@ -86,7 +86,7 @@
             android:layout_alignParentBottom="true"
             android:background="@color/gris_claro"
             android:layout_width="match_parent"
-            android:layout_height="1dp"/>
+            android:layout_height="1px"/>
 
     </RelativeLayout>
 

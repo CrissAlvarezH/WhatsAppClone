@@ -1,6 +1,6 @@
 package clones.cristian.com.whatsappclon.modelos;
 
-public class ContactoChat {
+public class Chat {
     private int idContacto;
     private String nombreContacto;
     private String urlImagen;
@@ -8,7 +8,16 @@ public class ContactoChat {
     private String horaMensaje;
     private int cantidadMsjNoLeidos;
 
-    public ContactoChat() {
+    public Chat(int idContacto, String nombreContacto, String urlImagen, String ultimoMensaje, String horaMensaje, int cantidadMsjNoLeidos) {
+        this.idContacto = idContacto;
+        this.nombreContacto = nombreContacto;
+        this.urlImagen = urlImagen;
+        this.ultimoMensaje = ultimoMensaje;
+        this.horaMensaje = horaMensaje;
+        this.cantidadMsjNoLeidos = cantidadMsjNoLeidos;
+    }
+
+    public Chat() {
     }
 
     public int getIdContacto() {

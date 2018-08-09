@@ -14,14 +14,14 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import clones.cristian.com.whatsappclon.R;
-import clones.cristian.com.whatsappclon.modelos.ContactoChat;
+import clones.cristian.com.whatsappclon.modelos.Chat;
 
-public class ContactosAdapter extends RecyclerView.Adapter<ContactosAdapter.ContactosViewHolder> {
+public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ContactosViewHolder> {
 
     private Context contexto;
-    private ArrayList<ContactoChat> contactos;
+    private ArrayList<Chat> contactos;
 
-    public ContactosAdapter(Context context, ArrayList<ContactoChat> contactos) {
+    public ChatAdapter(Context context, ArrayList<Chat> contactos) {
         this.contactos = contactos;
         this.contexto = context;
     }
@@ -46,14 +46,14 @@ public class ContactosAdapter extends RecyclerView.Adapter<ContactosAdapter.Cont
     @Override
     public ContactosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View item = LayoutInflater.from( parent.getContext() ).inflate(R.layout.item_contacto, parent, false);
+        View item = LayoutInflater.from( parent.getContext() ).inflate(R.layout.item_chat, parent, false);
 
         return new ContactosViewHolder( item );
     }
 
     @Override
     public void onBindViewHolder(@NonNull ContactosViewHolder holder, int position) {
-        ContactoChat contacto = contactos.get( position );
+        Chat contacto = contactos.get( position );
 
         holder.txtNombreContacto.setText( contacto.getNombreContacto() );
         holder.txtUltimoMensaje.setText( contacto.getUltimoMensaje() );
