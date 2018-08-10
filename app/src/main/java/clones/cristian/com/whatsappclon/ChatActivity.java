@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import clones.cristian.com.whatsappclon.adaptadores.ChatAdapter;
 import clones.cristian.com.whatsappclon.glide.GlideApp;
 import clones.cristian.com.whatsappclon.modelos.Chat;
+import clones.cristian.com.whatsappclon.utilidades.Constantes;
 
 public class ChatActivity extends AppCompatActivity implements ChatAdapter.ChatListener{
 
@@ -72,7 +73,7 @@ public class ChatActivity extends AppCompatActivity implements ChatAdapter.ChatL
     }
 
     @Override
-    public void onChatImgClick(Chat chat, int posicion) {
+    public void onChatImgClick(final Chat chat, int posicion) {
         Dialog dialogoImg = new Dialog(this);
 
         dialogoImg.setContentView(R.layout.dialogo_img_perfil);
@@ -88,6 +89,18 @@ public class ChatActivity extends AppCompatActivity implements ChatAdapter.ChatL
                 .into(imgPerfil);
 
         txtNombre.setText( chat.getNombreContacto() );
+
+        imgPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatActivity.this, ImagenActivity.class);
+
+                intent.putExtra(Constantes.Args.URL_IMG, chat.getUrlImagen());
+                intent.putExtra(Constantes.Args.NOMBRE_CONTACTO, chat.getNombreContacto());
+
+                startActivity(intent);
+            }
+        });
 
         imgChat.setOnClickListener(new View.OnClickListener() {
             @Override
