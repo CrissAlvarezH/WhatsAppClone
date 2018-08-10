@@ -22,6 +22,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     public interface ChatListener {
         void onChatClick(Chat chat, int posicion);
         void onChatLongClick(Chat chat, int posicion);
+        void onChatImgClick(Chat chat, int posicion);
     }
 
     private Context contexto;
@@ -51,13 +52,23 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
             itemView.setOnLongClickListener(this);
             itemView.setOnClickListener(this);
+            img.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            if( chatListener != null ){
-                chatListener.onChatClick( chats.get(getAdapterPosition()), getAdapterPosition() );
+            if( chatListener != null ) {
+                switch (v.getId()) {
+                    case R.id.layout_item_chat:
+                       chatListener.onChatClick( chats.get(getAdapterPosition()), getAdapterPosition() );
+
+                        break;
+                    case R.id.item_img:
+                        chatListener.onChatImgClick( chats.get(getAdapterPosition()), getAdapterPosition() );
+                        break;
+                }
             }
+
         }
 
         @Override
