@@ -10,8 +10,8 @@
     <!-- IMAGEN DE PERFIL -->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/item_img"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:src="@drawable/imagen_prueba"

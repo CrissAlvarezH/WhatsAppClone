@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import clones.cristian.com.whatsappclon.R;
+import clones.cristian.com.whatsappclon.glide.GlideApp;
 import clones.cristian.com.whatsappclon.modelos.Contacto;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -76,8 +77,9 @@ public class ContactosAdapter extends RecyclerView.Adapter<ContactosAdapter.Cont
             holder.txtEstado.setVisibility(View.VISIBLE);
         }
 
-        Glide.with(contexto)
+        GlideApp.with(contexto)
                 .load( contacto.getUrlImg() )
+                .placeholder(R.drawable.imagen_perfil_vacia)
                 .into( holder.img );
     }
 

@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import clones.cristian.com.whatsappclon.R;
+import clones.cristian.com.whatsappclon.glide.GlideApp;
 import clones.cristian.com.whatsappclon.modelos.Chat;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder> {
@@ -96,8 +97,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
             holder.txtCantidadMsj.setVisibility(View.VISIBLE);
         }
 
-        Glide.with(contexto)
+        GlideApp.with(contexto)
                 .load( contacto.getUrlImagen() )
+                .placeholder(R.drawable.imagen_perfil_vacia)
                 .into( holder.img );
     }
 
