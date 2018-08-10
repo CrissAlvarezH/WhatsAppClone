@@ -34,9 +34,9 @@ public class ContactosActivity extends AppCompatActivity implements ContactosAda
 
         contactos = new ArrayList<>();
 
-        contactos.add( new Contacto(1, "Contacto 1", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGsVX7FxBWMuWzfjqGq6uctbI7135afcD9gnME1Xcf7DjsjEn_") );
-        contactos.add( new Contacto(1, "Contacto 2", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCqWPEHiLHJfQEiWCDs5qBSVOB9pC2cN6cWdgyVYftHU6T7gtl") );
-        contactos.add( new Contacto(1, "Contacto 3", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQ6rh2RPa1CHIiLRCiRlW0CbFJQmrNvrtJrcvVrbcX1TyqCeS") );
+        contactos.add( new Contacto(1, "Contacto 1", "Estado 1", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGsVX7FxBWMuWzfjqGq6uctbI7135afcD9gnME1Xcf7DjsjEn_") );
+        contactos.add( new Contacto(1, "Contacto 2", "","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCqWPEHiLHJfQEiWCDs5qBSVOB9pC2cN6cWdgyVYftHU6T7gtl") );
+        contactos.add( new Contacto(1, "Contacto 3", "Estado 3","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQ6rh2RPa1CHIiLRCiRlW0CbFJQmrNvrtJrcvVrbcX1TyqCeS") );
 
         adapterContactos = new ContactosAdapter(contactos, this, this);
 

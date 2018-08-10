@@ -34,13 +34,14 @@ public class ContactosAdapter extends RecyclerView.Adapter<ContactosAdapter.Cont
 
     public class ContactosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private CircleImageView img;
-        private TextView txtNombre;
+        private TextView txtNombre, txtEstado;
 
         public ContactosViewHolder(View itemView) {
             super(itemView);
 
             img = itemView.findViewById(R.id.item_contacto_img);
             txtNombre = itemView.findViewById(R.id.item_contacto_nombre);
+            txtEstado = itemView.findViewById(R.id.item_contacto_estado);
 
             itemView.setOnClickListener(this);
         }
@@ -67,6 +68,13 @@ public class ContactosAdapter extends RecyclerView.Adapter<ContactosAdapter.Cont
         Contacto contacto = contactos.get(position);
 
         holder.txtNombre.setText( contacto.getNombre() );
+
+        if( contacto.getEstado().trim().isEmpty() ){
+            holder.txtEstado.setVisibility(View.GONE);
+        }else{
+            holder.txtEstado.setText( contacto.getEstado() );
+            holder.txtEstado.setVisibility(View.VISIBLE);
+        }
 
         Glide.with(contexto)
                 .load( contacto.getUrlImg() )

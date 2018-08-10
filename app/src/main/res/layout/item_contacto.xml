@@ -11,21 +11,36 @@
         android:id="@+id/item_contacto_img"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="10dp"
         app:civ_border_color="@color/negro"
         app:civ_border_width="1dp" />
 
-    <TextView
-        android:id="@+id/item_contacto_nombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <LinearLayout
         android:paddingRight="10dp"
-        android:text="Nombre del contacto"
-        android:textColor="@color/negro"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/item_contacto_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre del contacto"
+            android:textColor="@color/negro"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item_contacto_estado"
+            android:layout_marginTop="3dp"
+            android:text="Estado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 
 </LinearLayout>
