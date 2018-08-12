@@ -6,6 +6,8 @@
 
     <color name="negro">#000000</color>
     <color name="gris_claro">#9fb3b3b3</color>
+    <color name="gris">#6b6b6b</color>
+    <color name="gris_oscuro">#494949</color>
     <color name="blanco">#fff</color>
     <color name="negro_semitrasparente">#52000000</color>
 </resources>

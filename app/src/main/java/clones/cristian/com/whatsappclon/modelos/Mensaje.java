@@ -14,7 +14,6 @@ public class Mensaje {
     public static class Tipos {
         public static final int ENVIADO = 1;
         public static final int RECIBIDO = 2;
-        public static final int INFO = 3;
     }
 
     public int getTipo() {
