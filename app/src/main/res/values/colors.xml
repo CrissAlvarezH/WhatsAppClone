@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="negro">#000000</color>
+    <color name="gris_muy_claro">#9fd2d2d2</color>
     <color name="gris_claro">#9fb3b3b3</color>
     <color name="gris">#6b6b6b</color>
     <color name="gris_oscuro">#494949</color>

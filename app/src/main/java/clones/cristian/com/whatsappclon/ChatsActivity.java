@@ -121,7 +121,9 @@ public class ChatsActivity extends AppCompatActivity implements ChatAdapter.Chat
         imgInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(ChatsActivity.this, DetallesContactoActivity.class);
+                intent.putExtra( Constantes.Args.CONTACTO, chat.getContacto() );
+                startActivity(intent);
             }
         });
 

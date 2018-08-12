@@ -1,5 +1,6 @@
 package clones.cristian.com.whatsappclon;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,6 +32,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout layoutAtras;
 
     private MensajesAdapter mensajesAdapter;
+    private Contacto contacto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_chat);
 
         Bundle extras = getIntent().getExtras();
-        Contacto contacto = (Contacto) extras.getSerializable(Constantes.Args.CONTACTO);
+        contacto = (Contacto) extras.getSerializable(Constantes.Args.CONTACTO);
 
         setToolbar(contacto.getUrlImg(), contacto.getNombre());
 
@@ -115,6 +117,11 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.imgbtn_enviar:
 
+                break;
+            case R.id.txt_title_toolbar:
+                Intent intent = new Intent(this, DetallesContactoActivity.class);
+                intent.putExtra( Constantes.Args.CONTACTO, contacto );
+                startActivity(intent);
                 break;
             case R.id.layout_atras:
                 finish();
