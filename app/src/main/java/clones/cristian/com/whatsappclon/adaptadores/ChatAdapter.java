@@ -10,12 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
 import java.util.ArrayList;
 
 import clones.cristian.com.whatsappclon.R;
 import clones.cristian.com.whatsappclon.glide.GlideApp;
 import clones.cristian.com.whatsappclon.modelos.Chat;
+import clones.cristian.com.whatsappclon.modelos.Contacto;
+import clones.cristian.com.whatsappclon.modelos.Mensaje;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder> {
 
@@ -94,22 +97,25 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
-        Chat contacto = chats.get( position );
+        Chat chat = chats.get( position );
 
-        holder.txtNombreContacto.setText( contacto.getNombreContacto() );
-        holder.txtUltimoMensaje.setText( contacto.getUltimoMensaje() );
-        holder.txtHora.setText( contacto.getHoraMensaje() );
+        Contacto contacto = chat.getContacto();
+        Mensaje ultimoMsj = chat.getUltimoMensaje();
+
+        holder.txtNombreContacto.setText( contacto.getNombre() );
+        holder.txtUltimoMensaje.setText( ultimoMsj.getCuerpo() );
+        holder.txtHora.setText( ultimoMsj.getHora() );
 
         // Si no hay mensaje no leidos escondemos el txtCantidadMsj
-        if( contacto.getCantidadMsjNoLeidos() == 0 ){
+        if( chat.getCantidadMsjNoLeidos() == 0 ){
             holder.txtCantidadMsj.setVisibility(View.INVISIBLE);
         }else {
-            holder.txtCantidadMsj.setText( contacto.getCantidadMsjNoLeidos() + "" );
+            holder.txtCantidadMsj.setText( chat.getCantidadMsjNoLeidos() + "" );
             holder.txtCantidadMsj.setVisibility(View.VISIBLE);
         }
 
         GlideApp.with(contexto)
-                .load( contacto.getUrlImagen() )
+                .load( contacto.getUrlImg() )
                 .placeholder(R.drawable.imagen_perfil_vacia)
                 .into( holder.img );
     }

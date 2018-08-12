@@ -7,7 +7,10 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+
 import clones.cristian.com.whatsappclon.glide.GlideApp;
+import clones.cristian.com.whatsappclon.modelos.Contacto;
 import clones.cristian.com.whatsappclon.utilidades.Constantes;
 import clones.cristian.com.whatsappclon.utilidades.StatusBarUtil;
 
@@ -26,18 +29,18 @@ public class ImagenActivity extends AppCompatActivity {
         img = findViewById(R.id.img_grande);
 
         if( extras != null) {
-            String urlImg = extras.getString(Constantes.Args.URL_IMG);
-            String nombre = extras.getString(Constantes.Args.NOMBRE_CONTACTO);
+            Contacto contacto = (Contacto) extras.getSerializable( Constantes.Args.CONTACTO );
 
-            setToolbar(nombre);
+            setToolbar( contacto.getNombre() );
 
             GlideApp.with(this)
-                    .load(urlImg)
+                    .load( contacto.getUrlImg() )
                     .placeholder(R.drawable.imagen_perfil_vacia)
+                    .transition(DrawableTransitionOptions.withCrossFade())
                     .into(img);
 
         }else{
-            Toast.makeText(this, "Imagen no especificada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Contacto no especificado", Toast.LENGTH_SHORT).show();
             finish();
         }
     }

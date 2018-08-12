@@ -1,5 +1,6 @@
 package clones.cristian.com.whatsappclon;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 
 import clones.cristian.com.whatsappclon.adaptadores.ContactosAdapter;
 import clones.cristian.com.whatsappclon.modelos.Contacto;
+import clones.cristian.com.whatsappclon.utilidades.Constantes;
 
 public class ContactosActivity extends AppCompatActivity implements ContactosAdapter.ContactosListener {
 
@@ -82,7 +84,9 @@ public class ContactosActivity extends AppCompatActivity implements ContactosAda
 
     @Override
     public void contactoClick(Contacto contacto, int posicion) {
-        Toast.makeText(this, "Abrir chat con "+contacto.getNombre(), Toast.LENGTH_SHORT).show();
+        Intent intentChat = new Intent(this, ChatActivity.class);
+        intentChat.putExtra(Constantes.Args.CONTACTO, contacto);
+        startActivity(intentChat);
     }
 
     private class Buscador implements SearchView.OnQueryTextListener {

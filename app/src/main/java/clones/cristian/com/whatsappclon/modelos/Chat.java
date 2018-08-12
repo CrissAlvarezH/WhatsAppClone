@@ -1,63 +1,33 @@
 package clones.cristian.com.whatsappclon.modelos;
 
 public class Chat {
-    private int idContacto;
-    private String nombreContacto;
-    private String urlImagen;
-    private String ultimoMensaje;
-    private String horaMensaje;
+    private Contacto contacto;
+    private Mensaje ultimoMensaje;
     private int cantidadMsjNoLeidos;
 
-    public Chat(int idContacto, String nombreContacto, String urlImagen, String ultimoMensaje, String horaMensaje, int cantidadMsjNoLeidos) {
-        this.idContacto = idContacto;
-        this.nombreContacto = nombreContacto;
-        this.urlImagen = urlImagen;
+    public Chat(Contacto contacto, Mensaje ultimoMensaje, int cantidadMsjNoLeidos) {
+        this.contacto = contacto;
         this.ultimoMensaje = ultimoMensaje;
-        this.horaMensaje = horaMensaje;
         this.cantidadMsjNoLeidos = cantidadMsjNoLeidos;
     }
 
     public Chat() {
     }
 
-    public int getIdContacto() {
-        return idContacto;
+    public Contacto getContacto() {
+        return contacto;
     }
 
-    public void setIdContacto(int idContacto) {
-        this.idContacto = idContacto;
+    public void setContacto(Contacto contacto) {
+        this.contacto = contacto;
     }
 
-    public String getNombreContacto() {
-        return nombreContacto;
-    }
-
-    public void setNombreContacto(String nombreContacto) {
-        this.nombreContacto = nombreContacto;
-    }
-
-    public String getUrlImagen() {
-        return urlImagen;
-    }
-
-    public void setUrlImagen(String urlImagen) {
-        this.urlImagen = urlImagen;
-    }
-
-    public String getUltimoMensaje() {
+    public Mensaje getUltimoMensaje() {
         return ultimoMensaje;
     }
 
-    public void setUltimoMensaje(String ultimoMensaje) {
+    public void setUltimoMensaje(Mensaje ultimoMensaje) {
         this.ultimoMensaje = ultimoMensaje;
-    }
-
-    public String getHoraMensaje() {
-        return horaMensaje;
-    }
-
-    public void setHoraMensaje(String horaMensaje) {
-        this.horaMensaje = horaMensaje;
     }
 
     public int getCantidadMsjNoLeidos() {
