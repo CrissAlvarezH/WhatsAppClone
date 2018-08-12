@@ -104,5 +104,8 @@ public class MensajesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return mensajes.size();
     }
 
-
+    public void agregarMensaje(Mensaje mensaje){
+        mensajes.add(mensaje);
+        notifyItemInserted(mensajes.size()  - 1);
+    }
 }

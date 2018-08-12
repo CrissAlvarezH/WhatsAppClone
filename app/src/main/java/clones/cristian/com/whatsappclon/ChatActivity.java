@@ -1,6 +1,7 @@
 package clones.cristian.com.whatsappclon;
 
 import android.content.Intent;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import clones.cristian.com.whatsappclon.adaptadores.MensajesAdapter;
 import clones.cristian.com.whatsappclon.glide.GlideApp;
@@ -70,25 +74,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         mensajes.add(mensaje4);
         mensajes.add(mensaje5);
         mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
-        mensajes.add(mensaje6);
 
         mensajesAdapter = new MensajesAdapter(mensajes);
 
@@ -116,6 +101,24 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.imgbtn_enviar:
+
+                if( !edtMensaje.getText().toString().trim().isEmpty() ){
+                    String hora = new SimpleDateFormat("HH:mm", Locale.getDefault())
+                                            .format( new Date() );
+
+                    Mensaje mensaje = new Mensaje(
+                            Mensaje.Tipos.ENVIADO,
+                            edtMensaje.getText().toString().trim(),
+                            hora
+                    );
+
+                    mensajesAdapter.agregarMensaje(mensaje);
+
+                    edtMensaje.setText("");;
+
+                    // Movemos el scroll hasta el ultimo mensaje
+                    recyclerMensajes.smoothScrollToPosition( mensajesAdapter.getItemCount() - 1 );
+                }
 
                 break;
             case R.id.txt_title_toolbar:
