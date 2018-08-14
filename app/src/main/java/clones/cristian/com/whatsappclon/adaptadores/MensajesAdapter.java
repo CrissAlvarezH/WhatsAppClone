@@ -8,39 +8,44 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import clones.cristian.com.whatsappclon.R;
 import clones.cristian.com.whatsappclon.modelos.Mensaje;
 
-public class MensajesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.MensajeViewHolder> {
     private ArrayList<Mensaje> mensajes;
 
     public MensajesAdapter(ArrayList<Mensaje> mensajes) {
         this.mensajes = mensajes;
     }
 
-    public class MensajeEnviadoViewHolder extends RecyclerView.ViewHolder {
+    public class MensajeViewHolder extends RecyclerView.ViewHolder {
         private TextView txtCuerpo, txtHora;
         private ImageView imgIcono;
 
-        public MensajeEnviadoViewHolder(View itemView) {
+        public MensajeViewHolder(View itemView) {
             super(itemView);
 
             txtCuerpo = itemView.findViewById(R.id.item_txt_cuerpo_msj);
             txtHora = itemView.findViewById(R.id.item_txt_hora_msj);
             imgIcono = itemView.findViewById(R.id.item_img_icono_msj);
         }
-    }
 
-    public class MensajeRecibidoViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtCuerpo, txtHora;
+        public void setCuerpo(String cuerpo){
+            if( txtCuerpo != null ) txtCuerpo.setText(cuerpo);
+        }
 
-        public MensajeRecibidoViewHolder(View itemView) {
-            super(itemView);
+        public void setHora(String hora){
+            if( txtHora != null ) txtHora.setText(hora);
+        }
 
-            txtCuerpo = itemView.findViewById(R.id.item_txt_cuerpo_msj);
-            txtHora = itemView.findViewById(R.id.item_txt_hora_msj);
+        public void setImgIcono(String url){
+            if( imgIcono != null ) {
+                // TODO setear el logo
+            }
         }
     }
 
@@ -51,52 +56,30 @@ public class MensajesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View item;
+    public MensajeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        int layoutItem = -1;
 
         switch (viewType){
             case Mensaje.Tipos.ENVIADO:
-                item = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_mensaje_enviado, parent, false);
-
-                return new MensajeEnviadoViewHolder(item);
-
+                layoutItem = R.layout.item_mensaje_enviado;
+                break;
             case Mensaje.Tipos.RECIBIDO:
-                item = LayoutInflater.from( parent.getContext() )
-                        .inflate(R.layout.item_mensaje_recibido, parent, false);
-
-                return new MensajeRecibidoViewHolder(item);
+                layoutItem = R.layout.item_mensaje_recibido;
+                break;
         }
 
-        // Por defecto ponemos el mensaje enviado
-        item = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_mensaje_enviado, parent, false);
+        View item = LayoutInflater.from( parent.getContext() )
+                .inflate(layoutItem, parent, false);
 
-        return new MensajeEnviadoViewHolder(item);
+        return new MensajeViewHolder(item);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull MensajeViewHolder holder, int position) {
         Mensaje mensaje = mensajes.get(position);
 
-        switch ( holder.getItemViewType() ){
-            case Mensaje.Tipos.RECIBIDO:
-                MensajeRecibidoViewHolder holderRec = (MensajeRecibidoViewHolder) holder;
-
-                holderRec.txtCuerpo.setText( mensaje.getCuerpo() );
-                holderRec.txtHora.setText( mensaje.getHora() );
-
-                break;
-            case Mensaje.Tipos.ENVIADO:
-
-                MensajeEnviadoViewHolder holderEnv = (MensajeEnviadoViewHolder) holder;
-
-                holderEnv.txtCuerpo.setText( mensaje.getCuerpo() );
-                holderEnv.txtHora.setText( mensaje.getHora() );
-
-                break;
-        }
+        holder.setCuerpo( mensaje.getCuerpo() );
+        holder.setHora( mensaje.getHora() );
     }
 
     @Override
