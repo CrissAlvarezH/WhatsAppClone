@@ -5,7 +5,7 @@
     android:background="@color/blanco"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ContactosActivity">
+    tools:context=".actividades.ContactosActivity">
 
     <include
         android:id="@+id/toolbar_contactos"

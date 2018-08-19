@@ -1,4 +1,4 @@
-package clones.cristian.com.whatsappclon;
+package clones.cristian.com.whatsappclon.actividades;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -13,9 +13,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
+import clones.cristian.com.whatsappclon.R;
 import clones.cristian.com.whatsappclon.adaptadores.ChatAdapter;
 import clones.cristian.com.whatsappclon.glide.GlideApp;
 import clones.cristian.com.whatsappclon.modelos.Chat;
@@ -27,6 +35,35 @@ public class ChatsActivity extends AppCompatActivity implements ChatAdapter.Chat
 
     private RecyclerView recyclerChats;
     private ChatAdapter chatAdapter;
+
+    private Socket socket;
+    {
+        try {
+            socket = IO.socket("http://192.168.137.1:3000");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        socket.on("recibirMensaje", onRecibirMensaje);
+
+        socket.connect();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        socket.disconnect();
+
+        if(onRecibirMensaje != null)
+            socket.off("recibirMensaje", onRecibirMensaje);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +79,15 @@ public class ChatsActivity extends AppCompatActivity implements ChatAdapter.Chat
         ArrayList<Chat> chats = new ArrayList<>();
 
         // Llenamos con datos de prueba
-        Contacto contato1 = new Contacto(1, "Cristian", "Disponible", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnuj-RSh6Sqf_J5BKjXAaMjoC9zeeImmxncIg2QQIHmfMadNW5");
-        Contacto contato2 = new Contacto(1, "Jose", "Ocupado", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmWrzMfHDpcOcSPxiXERbtr_qbzhOAhJVvBQI3xnP8dsskoLP-");
-        Contacto contato3 = new Contacto(1, "Maria", "En la Universidad", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_hmURl3BzZBAZ-TWMj8PMEWhuOQEqPHbJToXvDAhwFEtypkiq");
-        Contacto contato4 = new Contacto(1, "Juan", "En mi casa", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpJd4_WJ9OpAkHOPjiHJ1uysrxMq45Kcry7tbCPUMjdJ9s_fQ0");
+        Contacto contato1 = new Contacto(1,"Cristian", "Disponible", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnuj-RSh6Sqf_J5BKjXAaMjoC9zeeImmxncIg2QQIHmfMadNW5");
+        Contacto contato2 = new Contacto(1,"Jose", "Ocupado", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmWrzMfHDpcOcSPxiXERbtr_qbzhOAhJVvBQI3xnP8dsskoLP-");
+        Contacto contato3 = new Contacto(1,"Maria", "En la Universidad", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_hmURl3BzZBAZ-TWMj8PMEWhuOQEqPHbJToXvDAhwFEtypkiq");
+        Contacto contato4 = new Contacto(1,"Juan", "En mi casa", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpJd4_WJ9OpAkHOPjiHJ1uysrxMq45Kcry7tbCPUMjdJ9s_fQ0");
 
-        Mensaje mensaje1 = new Mensaje(Mensaje.Tipos.RECIBIDO, "Hola ¿como estás?", "12:34 PM");
-        Mensaje mensaje2 = new Mensaje(Mensaje.Tipos.RECIBIDO, "¿Como te ha ido?", "10:34 PM");
-        Mensaje mensaje3 = new Mensaje(Mensaje.Tipos.RECIBIDO, "¿Qué haces?", "9:14 AM");
-        Mensaje mensaje4 = new Mensaje(Mensaje.Tipos.RECIBIDO, "Yo estoy bien", "2:08 AM");
+        Mensaje mensaje1 = new Mensaje(1, Mensaje.Tipos.RECIBIDO, "Hola ¿como estás?", "", "12:34 PM", Mensaje.Estados.ENVIADO, 1);
+        Mensaje mensaje2 = new Mensaje(1, Mensaje.Tipos.RECIBIDO, "¿Como te ha ido?", "","10:34 PM", Mensaje.Estados.ENVIADO, 1);
+        Mensaje mensaje3 = new Mensaje(1, Mensaje.Tipos.RECIBIDO, "¿Qué haces?", "","9:14 AM", Mensaje.Estados.ENVIADO, 1);
+        Mensaje mensaje4 = new Mensaje(1, Mensaje.Tipos.RECIBIDO, "Yo estoy bien", "","2:08 AM", Mensaje.Estados.ENVIADO, 1);
 
         chats.add( new Chat(contato1, mensaje1, 2) );
         chats.add( new Chat(contato2, mensaje2, 10) );
@@ -134,4 +171,33 @@ public class ChatsActivity extends AppCompatActivity implements ChatAdapter.Chat
         Intent intent = new Intent(this, ContactosActivity.class);
         startActivity(intent);
     }
+
+    // ============================================================================================
+    // [INICIO] EVENTOS DE SOCKET IO
+    // --------------------------------------------------------------------------------------------
+
+    private Emitter.Listener onRecibirMensaje = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            JSONObject json = (JSONObject) args[0];
+
+            try {
+
+                String idEmisor = json.getString("idEmisor");
+                JSONObject mensaje = json.getJSONObject("mensaje");
+
+                String cuerpoMsj = mensaje.getString("cuerpo");
+                String horaMsj = mensaje.getString("hora");
+
+                // TODO terminar de agregar el mensaje en el adaptador (agregar o actualizar un item)
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    // --------------------------------------------------------------------------------------------
+    // [FIN] EVENTOS DE SOCKET IO
+    // ============================================================================================
 }

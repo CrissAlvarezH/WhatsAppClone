@@ -5,23 +5,25 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".ChatAplicacion"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChatsActivity">
+        <activity android:name=".actividades.ChatsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ContactosActivity" />
-        <activity android:name=".ImagenActivity" />
-        <activity android:name=".ChatActivity" />
-        <activity android:name=".DetallesContactoActivity"></activity>
+        <activity android:name=".actividades.ContactosActivity" />
+        <activity android:name=".actividades.ImagenActivity" />
+        <activity android:name=".actividades.ChatActivity" />
+        <activity android:name=".actividades.DetallesContactoActivity" />
+        <activity android:name=".actividades.RegistroActivity"></activity>
     </application>
 
 </manifest>

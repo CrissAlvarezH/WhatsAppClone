@@ -1,4 +1,4 @@
-package clones.cristian.com.whatsappclon;
+package clones.cristian.com.whatsappclon.actividades;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
+import clones.cristian.com.whatsappclon.R;
 import clones.cristian.com.whatsappclon.glide.GlideApp;
 import clones.cristian.com.whatsappclon.modelos.Contacto;
 import clones.cristian.com.whatsappclon.utilidades.Constantes;

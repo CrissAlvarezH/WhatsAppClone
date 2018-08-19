@@ -1,4 +1,4 @@
-package clones.cristian.com.whatsappclon;
+package clones.cristian.com.whatsappclon.actividades;
 
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
 import java.util.ArrayList;
 
+import clones.cristian.com.whatsappclon.R;
 import clones.cristian.com.whatsappclon.adaptadores.ImagenesAdapter;
 import clones.cristian.com.whatsappclon.glide.GlideApp;
 import clones.cristian.com.whatsappclon.modelos.Contacto;

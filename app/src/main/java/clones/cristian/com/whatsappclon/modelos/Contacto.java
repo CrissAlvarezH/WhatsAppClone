@@ -1,8 +1,16 @@
 package clones.cristian.com.whatsappclon.modelos;
 
+import android.content.ContentValues;
+
 import java.io.Serializable;
 
-public class Contacto implements Serializable {
+import static clones.cristian.com.whatsappclon.basedatos.DBHelper.ESTADO;
+import static clones.cristian.com.whatsappclon.basedatos.DBHelper.ID;
+import static clones.cristian.com.whatsappclon.basedatos.DBHelper.NOMBRE;
+import static clones.cristian.com.whatsappclon.basedatos.DBHelper.TABLA_CONTACTOS;
+import static clones.cristian.com.whatsappclon.basedatos.DBHelper.URL_IMG;
+
+public class Contacto implements Serializable, BaseModelo {
     private int id;
     private String nombre;
     private String estado;
@@ -16,6 +24,31 @@ public class Contacto implements Serializable {
     }
 
     public Contacto() {
+    }
+
+    @Override
+    public ContentValues toContentValues() {
+        ContentValues values = new ContentValues();
+
+        values.put(ID, id);
+        values.put(NOMBRE, nombre);
+        values.put(ESTADO, estado);
+        values.put(URL_IMG, urlImg);
+
+        return values;
+    }
+
+    @Override
+    public String getNombreTabla() {
+        return TABLA_CONTACTOS;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEstado() {
@@ -34,13 +67,6 @@ public class Contacto implements Serializable {
         this.urlImg = urlImg;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getNombre() {
         return nombre;
@@ -49,4 +75,6 @@ public class Contacto implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+
 }

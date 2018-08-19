@@ -6,4 +6,11 @@ public class Constantes {
         public static final String NOMBRE_CONTACTO = "nombre_contacto";
         public static final String CONTACTO = "contacto";
     }
+
+    public static class ListenersIO {
+        public static final String ENTRAT_CHAT = "entrarChat";
+        public static final String LISTAR_CONECTADOS = "listarConectados";
+        public static final String RECIBIR_MENSAJE = "recibirMensaje";
+        public static final String ENVIAR_MENSAJE = "enviarMensaje";
+    }
 }
