@@ -13,4 +13,10 @@ public class Constantes {
         public static final String RECIBIR_MENSAJE = "recibirMensaje";
         public static final String ENVIAR_MENSAJE = "enviarMensaje";
     }
+
+    public static class URLs {
+        public static final String BASE = "http://localhost:3000/";
+        public static final String LOGIN = "login";
+        public static final String REGISTRO = "registro";
+    }
 }

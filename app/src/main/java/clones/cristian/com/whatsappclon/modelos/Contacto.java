@@ -15,12 +15,21 @@ public class Contacto implements Serializable, BaseModelo {
     private String nombre;
     private String estado;
     private String urlImg;
+    private String pass;
 
     public Contacto(int id, String nombre, String estado, String urlImg) {
         this.id = id;
         this.nombre = nombre;
         this.estado = estado;
         this.urlImg = urlImg;
+    }
+
+    public Contacto(int id, String pass, String nombre, String estado, String urlImg) {
+        this.id = id;
+        this.nombre = nombre;
+        this.estado = estado;
+        this.urlImg = urlImg;
+        this.pass = pass;
     }
 
     public Contacto() {
@@ -41,6 +50,14 @@ public class Contacto implements Serializable, BaseModelo {
     @Override
     public String getNombreTabla() {
         return TABLA_CONTACTOS;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public int getId() {
